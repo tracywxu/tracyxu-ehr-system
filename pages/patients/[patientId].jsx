@@ -55,10 +55,6 @@ export default function PatientPage() {
 
   return (
     <Layout>
-      {!isLoading && patientRecord.length === 0 && (
-        <Heading>No patient data to display yet.</Heading>
-      )}
-
       <SinglePatient
         name={patientRecord.name}
         dob={patientRecord.dob}
