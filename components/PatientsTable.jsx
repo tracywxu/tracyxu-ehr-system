@@ -7,14 +7,13 @@ import {
   Td,
   TableContainer,
   Heading,
-  Spinner,
   Button,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import PatientsCard from './UI/PatientsCard'
 import styled from 'styled-components'
 
-export default function PatientsTable({ allPatients, isLoading }) {
+export default function PatientsTable({ allPatients }) {
   return (
     <PatientsCard>
       <Header>
