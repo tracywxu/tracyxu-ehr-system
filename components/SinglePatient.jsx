@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import styled from 'styled-components'
 import NextLink from 'next/link'
+import { QUERIES } from '../lib/constants'
 
 export default function SinglePatient({ name, dob, picture, state, notes }) {
   return (
@@ -60,6 +61,10 @@ const Wrapper = styled.main`
   justify-content: center;
   align-items: center;
   gap: 100px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    gap: 60px;
+  }
 `
 
 const PatientInfo = styled.section`
@@ -67,6 +72,9 @@ const PatientInfo = styled.section`
   justify-content: space-around;
   gap: 120px;
   flex-wrap: wrap;
+  @media ${QUERIES.tabletAndSmaller} {
+    gap: 60px;
+  }
 `
 
 const Notes = styled.section`
