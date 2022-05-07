@@ -35,6 +35,15 @@ export default function PatientPage() {
     )
   }
 
+  if (!isLoading && Object.keys(patientRecord).length === 0) {
+    return (
+      <Alert status="warning">
+        <AlertIcon />
+        No patient data to display yet! Try adding a patient.
+      </Alert>
+    )
+  }
+
   if (error) {
     return (
       <Alert status="error">

@@ -8,12 +8,15 @@ import {
   TableContainer,
   Heading,
   Button,
+  Spinner,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import PatientsCard from './UI/PatientsCard'
 import styled from 'styled-components'
 
-export default function PatientsTable({ allPatients }) {
+export default function PatientsTable({ allPatients, isLoading }) {
   return (
     <PatientsCard>
       <Header>
@@ -34,6 +37,13 @@ export default function PatientsTable({ allPatients }) {
               <Th>details</Th>
             </Tr>
           </Thead>
+
+          {!isLoading && allPatients.length === 0 && (
+            <Alert status="warning">
+              <AlertIcon />
+              No patient data to display yet! Try adding a patient.
+            </Alert>
+          )}
 
           <Tbody>
             {allPatients.map(({ name, dob, state, id }) => (
