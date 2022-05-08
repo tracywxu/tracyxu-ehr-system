@@ -17,11 +17,11 @@ export default function EditPatient({
   patientId,
   setEditing,
 }) {
-  const [name, setName] = useState(patient.name || '')
+  const [name, setName] = useState(patient.name)
   const [birthdate, setBirthdate] = useState(formatDate(patient.dob))
-  const [residenceState, setResidenceState] = useState(patient.state || '')
-  const [picture, setPicture] = useState(patient.picture || '')
-  const [notes, setNotes] = useState(patient.notes || '')
+  const [residenceState, setResidenceState] = useState(patient.state)
+  const [picture, setPicture] = useState(patient.picture)
+  const [notes, setNotes] = useState(patient.notes)
 
   const toast = useToast()
 

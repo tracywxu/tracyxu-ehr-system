@@ -25,11 +25,11 @@ export default function PatientsTable({ allPatients }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: '',
+        name: 'New Patient Name',
         birthdate: null,
-        picture: '',
-        notes: '',
-        state: '',
+        picture: 'New Patient Photo URL',
+        notes: 'New Patient Notes',
+        state: 'New Patient State',
       }),
     })
     const { id } = await response.json()
