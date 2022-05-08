@@ -1,4 +1,12 @@
-import { Stack, Input, Text, Heading, Button, Textarea } from '@chakra-ui/react'
+import {
+  Stack,
+  Input,
+  Text,
+  Heading,
+  Button,
+  Textarea,
+  useToast,
+} from '@chakra-ui/react'
 import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { formatDate } from '../helpers'
@@ -15,7 +23,10 @@ export default function EditPatient({
   const [picture, setPicture] = useState(patient.picture || '')
   const [notes, setNotes] = useState(patient.notes || '')
 
+  const toast = useToast()
+
   async function updatePatientRecord() {
+    // optimistic update state locally
     updatePatient({
       name,
       dob: birthdate,
@@ -23,7 +34,8 @@ export default function EditPatient({
       picture,
       notes,
     })
-    const response = await fetch('/api/patients/update', {
+
+    await fetch('/api/patients/update', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -103,7 +115,19 @@ export default function EditPatient({
         </Stack>
 
         <ButtonGroup>
-          <Button colorScheme="pink" type="submit">
+          <Button
+            colorScheme="pink"
+            type="submit"
+            onClick={() => {
+              toast({
+                title: 'Patient Updated.',
+                description: "We've updated this patient for you.",
+                status: 'success',
+                duration: 1500,
+                isClosable: true,
+              })
+            }}
+          >
             Save Changes
           </Button>
         </ButtonGroup>
