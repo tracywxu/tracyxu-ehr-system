@@ -53,7 +53,7 @@ export default function SinglePatient({ patient }) {
 
 const EditPatient = ({ patient }) => {
   const [name, setName] = useState(patient.name)
-  const [birthdate, setBirthdate] = useState(patient.dob)
+  const [birthdate, setBirthdate] = useState(formatDate(patient.dob))
   const [residenceState, setResidenceState] = useState(patient.state)
   const [picture, setPicture] = useState(patient.picture)
   const [notes, setNotes] = useState(patient.notes)

@@ -21,7 +21,7 @@ export default function PatientsTable({ allPatients }) {
           All Patients
         </Heading>
         {/* Add new patient feature has not been implemented */}
-        <Button>Add New Patient</Button>
+        <Button colorScheme="pink">Add New Patient</Button>
       </Header>
 
       <TableContainer>
@@ -49,7 +49,9 @@ export default function PatientsTable({ allPatients }) {
                 <Td>{state}</Td>
                 <Td>
                   <NextLink href={`/patients/${id}`} passHref>
-                    <Button colorScheme="pink">View</Button>
+                    <Button colorScheme="pink" variant="link">
+                      View
+                    </Button>
                   </NextLink>
                 </Td>
               </Tr>
