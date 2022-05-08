@@ -56,13 +56,7 @@ export default function PatientPage() {
 
   return (
     <Layout>
-      <SinglePatient
-        name={patientRecord.name}
-        dob={patientRecord.dob}
-        notes={patientRecord.notes}
-        picture={patientRecord.picture}
-        state={patientRecord.state}
-      />
+      <SinglePatient patient={patientRecord} />
     </Layout>
   )
 }
