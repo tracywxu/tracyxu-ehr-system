@@ -3,51 +3,47 @@ import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { formatDate } from '../helpers'
 
-export default function EditPatient({ patient, patientId }) {
+export default function EditPatient({
+  patient,
+  updatePatient,
+  patientId,
+  setEditing,
+}) {
   const [name, setName] = useState(patient.name || '')
-  const [birthdate, setBirthdate] = useState(formatDate(patient.dob) || '')
+  const [birthdate, setBirthdate] = useState(formatDate(patient.dob))
   const [residenceState, setResidenceState] = useState(patient.state || '')
   const [picture, setPicture] = useState(patient.picture || '')
   const [notes, setNotes] = useState(patient.notes || '')
-  const [newPatientData, setNewPatientData] = useState({})
-  const [error, setError] = useState(null)
 
   async function updatePatientRecord() {
-    const response = await fetch('/api/patients', {
+    updatePatient({
+      name,
+      dob: birthdate,
+      state: residenceState,
+      picture,
+      notes,
+    })
+    const response = await fetch('/api/patients/update', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newPatientData),
+      body: JSON.stringify({
+        patientId,
+        name,
+        dob: birthdate,
+        state: residenceState,
+        picture,
+        notes,
+      }),
     })
-
-    console.log({ response })
-    return response
+    setEditing(false)
   }
 
   async function handleSubmit(e) {
     e.preventDefault()
     console.log('submitted!')
-
-    setNewPatientData({
-      id: patientId,
-      name,
-      birthdate,
-      residenceState,
-      picture,
-      notes,
-    })
-
     await updatePatientRecord()
-  }
-
-  if (error) {
-    return (
-      <Alert status="error">
-        <AlertIcon />
-        Sorry! Failed to create new patient.
-      </Alert>
-    )
   }
 
   return (

@@ -1,4 +1,7 @@
 export function formatDate(timestamp) {
+  if (!timestamp) {
+    return ''
+  }
   const formattedDate = new Date(timestamp).toLocaleDateString('default', {
     month: 'short',
     day: 'numeric',
@@ -8,6 +11,6 @@ export function formatDate(timestamp) {
 }
 
 export function convertDateToTimestamp(date) {
-  const timestamp = date.getTime()
+  const timestamp = new Date(date).getTime()
   return timestamp
 }

@@ -1,6 +1,5 @@
 // API endpoint: /api/patients/patientId
 import { AirtableBase } from '../../../airtable'
-import { convertDateToTimestamp } from '../../../helpers'
 
 async function getPatientRecord(patientId) {
   try {
@@ -13,36 +12,7 @@ async function getPatientRecord(patientId) {
   }
 }
 
-async function updatePatientRecord(
-  patientId,
-  { name, notes, residenceState, picture, birthdate },
-) {
-  try {
-    AirtableBase('Patients').update([
-      {
-        id: patientId,
-        fields: {
-          name: name,
-          state: residenceState,
-          dob: convertDateToTimestamp(birthdate),
-          picture: picture,
-          notes: notes,
-        },
-      },
-    ])
-  } catch (err) {
-    console.error(err)
-  }
-}
-
 export default async function patientHandler(req, res) {
-  if (req.method === 'PUT') {
-    const { patientId } = req.query
-    const updatedPatientInfo = req.body
-    const response = await updatePatientRecord(patientId, updatedPatientInfo)
-    res.status(201).json(response)
-  }
-
   try {
     const { patientId } = req.query
     const patientData = await getPatientRecord(patientId)

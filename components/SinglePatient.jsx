@@ -8,6 +8,7 @@ import EditPatient from './EditPatient'
 
 export default function SinglePatient({ patient, edit, patientId }) {
   const [editing, setEditing] = useState(false)
+  const [currentPatient, setCurrentPatient] = useState(patient)
 
   useEffect(() => {
     if (edit) {
@@ -32,8 +33,15 @@ export default function SinglePatient({ patient, edit, patientId }) {
           {editing ? 'Cancel' : 'Edit'}
         </Button>
       </ButtonGroup>
-      {!editing && <PatientDetails patient={patient} />}
-      {editing && <EditPatient patient={patient} patientId={patientId} />}
+      {!editing && <PatientDetails patient={currentPatient} />}
+      {editing && (
+        <EditPatient
+          patient={currentPatient}
+          updatePatient={setCurrentPatient}
+          patientId={patientId}
+          setEditing={setEditing}
+        />
+      )}
     </>
   )
 }

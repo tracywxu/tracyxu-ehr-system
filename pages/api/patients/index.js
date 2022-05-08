@@ -4,7 +4,9 @@ import { AirtableBase } from '../../../airtable'
 // get back an array of patient objects from Airtable
 async function getAllPatientsRecord() {
   try {
-    const response = await AirtableBase('Patients').select().all()
+    const response = await AirtableBase('Patients')
+      .select({ view: 'Grid view' })
+      .all()
     const patientData = response.map((patient) => {
       patient.fields['id'] = patient.id
       return patient.fields
