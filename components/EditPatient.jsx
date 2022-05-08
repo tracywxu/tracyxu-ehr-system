@@ -49,6 +49,7 @@ export default function EditPatient({
         notes,
       }),
     })
+
     setEditing(false)
   }
 
@@ -120,10 +121,11 @@ export default function EditPatient({
             type="submit"
             onClick={() => {
               toast({
-                title: 'Patient Updated.',
-                description: "We've updated this patient for you.",
-                status: 'success',
-                duration: 1500,
+                title: 'Patient Updating...',
+                description:
+                  "We are updating this patient's information for you.",
+                status: 'info',
+                duration: 3000,
                 isClosable: true,
               })
             }}
