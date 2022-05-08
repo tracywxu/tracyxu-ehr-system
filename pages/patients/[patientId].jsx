@@ -11,7 +11,7 @@ export default function PatientPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const router = useRouter()
-  const { patientId } = router.query
+  const { patientId, edit } = router.query
 
   useEffect(() => {
     async function getPatientData() {
@@ -56,7 +56,11 @@ export default function PatientPage() {
 
   return (
     <Layout>
-      <SinglePatient patient={patientRecord} />
+      <SinglePatient
+        patient={patientRecord}
+        edit={edit}
+        patientId={patientId}
+      />
     </Layout>
   )
 }

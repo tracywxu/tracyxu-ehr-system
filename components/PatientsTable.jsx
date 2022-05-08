@@ -12,16 +12,47 @@ import {
 import NextLink from 'next/link'
 import PatientsCard from './PatientsCard'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
+import { formatDate } from '../helpers'
 
 export default function PatientsTable({ allPatients }) {
+  const router = useRouter()
+
+  async function postNewPatientData() {
+    const response = await fetch('/api/patients/new-patient', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: '',
+        birthdate: null,
+        picture: '',
+        notes: '',
+        state: '',
+      }),
+    })
+    const { id } = await response.json()
+    return id
+  }
+
+  async function handleClick(e) {
+    e.preventDefault()
+    const newPatientId = await postNewPatientData()
+    router.push(`/patients/${newPatientId}?edit=true`)
+  }
+
   return (
     <PatientsCard>
       <Header>
         <Heading as="h2" size="lg">
           All Patients
         </Heading>
-        {/* Add new patient feature has not been implemented */}
-        <Button colorScheme="pink">Add New Patient</Button>
+        <NextLink href={`${router}`} passHref>
+          <Button colorScheme="pink" onClick={handleClick}>
+            Add New Patient
+          </Button>
+        </NextLink>
       </Header>
 
       <TableContainer>
@@ -39,13 +70,7 @@ export default function PatientsTable({ allPatients }) {
             {allPatients.map(({ name, dob, state, id }) => (
               <Tr key={id}>
                 <Td>{name}</Td>
-                <Td>
-                  {new Date(dob).toLocaleDateString('default', {
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric',
-                  })}
-                </Td>
+                <Td>{dob ? formatDate(dob) : ''}</Td>
                 <Td>{state}</Td>
                 <Td>
                   <NextLink href={`/patients/${id}`} passHref>
