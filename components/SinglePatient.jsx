@@ -31,7 +31,13 @@ export default function SinglePatient({ name, dob, picture, state, notes }) {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>{dob}</Td>
+                <Td>
+                  {new Date(dob).toLocaleDateString('default', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </Td>
                 <Td>{state}</Td>
               </Tr>
             </Tbody>

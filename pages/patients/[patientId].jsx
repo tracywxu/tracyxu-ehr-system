@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import SinglePatient from '../../components/SinglePatient'
-import Layout from '../../components/UI/Layout'
+import Layout from '../../components/Layout'
 import { Spinner, Alert, AlertIcon } from '@chakra-ui/react'
-import LoadingWrapper from '../../components/UI/LoadingWrapper'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 export default function PatientPage() {
   const [patientRecord, setPatientRecord] = useState({})
@@ -37,9 +37,9 @@ export default function PatientPage() {
 
   if (!isLoading && Object.keys(patientRecord).length === 0) {
     return (
-      <Alert status="warning">
+      <Alert status="error">
         <AlertIcon />
-        No patient data to display yet! Try adding a patient.
+        Something is wrong.
       </Alert>
     )
   }

@@ -1,7 +1,7 @@
 import PatientsTable from './PatientsTable'
 import { Spinner } from '@chakra-ui/react'
-import LoadingWrapper from './UI/LoadingWrapper'
-import Layout from './UI/Layout'
+import LoadingWrapper from './LoadingWrapper'
+import Layout from './Layout'
 
 export default function AllPatients({ allPatients, isLoading }) {
   if (isLoading) {

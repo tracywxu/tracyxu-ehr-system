@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { QUERIES } from '../../lib/constants'
+import { QUERIES } from '../lib/constants'
 
 export default function Layout({ children }) {
   return <Wrapper>{children}</Wrapper>
