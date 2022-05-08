@@ -8,14 +8,13 @@ import LoadingWrapper from '../../components/LoadingWrapper'
 
 export default function PatientPage() {
   const [patientRecord, setPatientRecord] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const router = useRouter()
   const { patientId } = router.query
 
   useEffect(() => {
     async function getPatientData() {
-      setIsLoading(true)
       const response = await fetch(`/api/patients/${patientId}`)
       if (response.status === 500) {
         setError(true)
@@ -24,7 +23,9 @@ export default function PatientPage() {
       setPatientRecord(patientData)
       setIsLoading(false)
     }
-    getPatientData()
+    if (patientId) {
+      getPatientData()
+    }
   }, [patientId])
 
   if (isLoading) {

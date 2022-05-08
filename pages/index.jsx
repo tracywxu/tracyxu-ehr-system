@@ -4,12 +4,11 @@ import { Alert, AlertIcon } from '@chakra-ui/react'
 
 export default function App() {
   const [allPatients, setAllPatients] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
     async function getAllPatientsData() {
-      setIsLoading(true)
       const response = await fetch(`/api/patients`)
       if (response.status === 500) {
         setError(true)
