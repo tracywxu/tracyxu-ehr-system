@@ -32,14 +32,14 @@ export default function App() {
     )
   }
 
-  // {
-  //   !isLoading && allPatients.length === 0 && (
-  //     <Alert status="warning">
-  //       <AlertIcon />
-  //       No patient data to display yet! Try adding a patient.
-  //     </Alert>
-  //   )
-  // }
+  {
+    !isLoading && allPatients.length === 0 && (
+      <Alert status="warning">
+        <AlertIcon />
+        No patient data to display yet! Try adding a patient.
+      </Alert>
+    )
+  }
 
   return (
     <>
