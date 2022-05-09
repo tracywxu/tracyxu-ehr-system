@@ -34,7 +34,9 @@ export default function SinglePatient({ patient, edit, patientId }) {
         </Button>
       </ButtonGroup>
 
-      {!editing && <PatientDetails patient={currentPatient} />}
+      {!editing && (
+        <PatientDetails patient={currentPatient} patientId={patientId} />
+      )}
       {editing && (
         <EditPatient
           patient={currentPatient}
